@@ -2,8 +2,8 @@
 # tasks file for grafana
 - name: copy docker-compose.yml
   copy:
-    src: docker-compose.yml
-    dest: "/root/grafana/"
+    src: grafana
+    dest: "/root/"
 
 - name: Run Grafana
   docker_compose:
