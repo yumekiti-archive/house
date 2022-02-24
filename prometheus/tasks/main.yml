@@ -3,4 +3,4 @@
 - name: copy prometheus
   copy:
     src: prometheus
-    dest: "/{{ user }}/"
+    dest: "/root/"

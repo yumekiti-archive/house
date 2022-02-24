@@ -1,3 +1,2 @@
 ---
 # defaults file for grafana
-user: "{{ ansible_env.USER }}"

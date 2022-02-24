@@ -3,10 +3,10 @@
 - name: copy docker-compose.yml
   copy:
     src: docker-compose.yml
-    dest: "/{{ user }}/grafana/"
+    dest: "/root/grafana/"
 
 - name: Run Grafana
   docker_compose:
-    project_src: "/{{ user }}/grafana"
+    project_src: "/root/grafana"
     files:
       - docker-compose.yml
