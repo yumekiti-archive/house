@@ -1,5 +1,5 @@
 ---
-# tasks file for raspi
+# tasks file for docker
 - hosts: localhost
   become: true
   vars_files:
@@ -10,4 +10,4 @@
 
     - name: apt upgrade
       apt:
-        upgrade: 'yes'
+        upgrade: "yes"

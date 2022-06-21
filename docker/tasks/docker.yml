@@ -48,7 +48,6 @@
     name: "{{ user }}"
     groups: docker
     append: yes
-  become: yes
 
 - name: Ensure docker service is enabled
   systemd:
