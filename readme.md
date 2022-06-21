@@ -1,6 +1,7 @@
-# 自宅サーバーIaC
+# 自宅サーバー IaC
 
 ## raspi
+
 ```
-sudo ansible-playbook ./raspi/tasks/main.yml
+sudo ansible-playbook ./docker/tasks/main.yml
 ```
