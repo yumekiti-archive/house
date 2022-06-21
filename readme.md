@@ -3,5 +3,5 @@
 ## raspi
 
 ```
-sudo ansible-playbook ./docker/tasks/main.yml
+sudo ansible-playbook raspi.yml
 ```
