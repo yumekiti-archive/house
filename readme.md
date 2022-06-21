@@ -1,5 +1,6 @@
 # 自宅サーバーIaC
 
 ## raspi
-
-Raspberry PI Zero
+```
+sudo ansible-playbook ./raspi/tasks/main.yml
+```

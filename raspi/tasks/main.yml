@@ -1,2 +1,13 @@
 ---
 # tasks file for raspi
+- hosts: localhost
+  become: true
+  vars_files:
+    - ../defaults/main.yml
+    - ../vars/main.yml
+  tasks:
+    - include_tasks: docker.yml
+
+    - name: apt upgrade
+      apt:
+        upgrade: 'yes'
