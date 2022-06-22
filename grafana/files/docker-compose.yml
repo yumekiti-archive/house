@@ -1,4 +1,5 @@
 version: "3"
+
 services:
   grafana:
     image: grafana/grafana
@@ -7,5 +8,6 @@ services:
       - grafana_data:/var/lib/grafana
     ports:
       - "3000:3000"
+
 volumes:
   grafana_data:
