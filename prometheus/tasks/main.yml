@@ -10,7 +10,7 @@
     src: docker-compose.yml
     dest: "/{{ user }}/prometheus/"
 
-- name: Run Grafana
+- name: Run Prometheus
   docker_compose:
     project_src: "/{{ user }}/prometheus"
     files:
