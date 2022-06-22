@@ -1,0 +1,18 @@
+---
+# tasks file for grafana
+- name: copy docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: "/{{ user }}/grafana/"
+
+- name: pip install docker
+  pip:
+    name:
+      - docker
+      - docker-compose
+
+- name: Run Grafana
+  docker_compose:
+    project_src: "/{{ user }}/grafana"
+    files:
+      - docker-compose.yml
