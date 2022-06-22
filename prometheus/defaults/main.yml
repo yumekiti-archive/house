@@ -1,2 +1,3 @@
 ---
 # defaults file for prometheus
+user: "{{ ansible_env.USER }}"
