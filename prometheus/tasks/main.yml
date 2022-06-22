@@ -1,0 +1,17 @@
+---
+# tasks file for prometheus
+- name: copy prometheus.yml
+  copy:
+    src: docker-compose.yml
+    dest: "/{{ user }}/prometheus/"
+
+- name: copy docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: "/{{ user }}/prometheus/"
+
+- name: Run Grafana
+  docker_compose:
+    project_src: "/{{ user }}/prometheus"
+    files:
+      - docker-compose.yml
