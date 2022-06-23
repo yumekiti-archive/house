@@ -3,3 +3,4 @@
   roles:
     - docker
     - grafana
+    - prometheus
