@@ -1,7 +1,11 @@
 # 自宅サーバー IaC
 
-## raspi
+## how to use
 
 ```
-sudo ansible-playbook raspi.yml
+./main.sh
+
+# or
+
+sudo ansible-playbook main.yml
 ```
