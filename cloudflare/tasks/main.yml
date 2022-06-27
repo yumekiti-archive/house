@@ -1,0 +1,9 @@
+---
+# tasks file for cloudflare
+- name: Download
+  get_url:
+    url: https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+    dest: /root/
+
+- name: Install cloudflared on the server
+  shell: dpkg -i /root/cloudflared-linux-amd64.deb
