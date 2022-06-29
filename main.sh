@@ -1,4 +1,3 @@
-sudo -i && \
 apt update && \
 apt install ansible && \
 git clone https://github.com/yumekiti/house.git && \
