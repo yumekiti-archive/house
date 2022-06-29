@@ -8,6 +8,7 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
+    restart: always
 
   node-exporter:
     image: quay.io/prometheus/node-exporter
@@ -19,3 +20,4 @@ services:
       - /proc:/host/proc
       - /sys:/host/sys
       - /:/rootfs
+    restart: always
