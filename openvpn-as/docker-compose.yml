@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 services:
   openvpn-as:
     image: linuxserver/openvpn-as
@@ -8,8 +8,10 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      # - TZ=Europe/London
+      # - INTERFACE=eth0 #optional
     volumes:
-      - /home/developer/openvpn-as:/config
+      - ./data:/config
     ports:
       - 943:943
       - 9443:9443
