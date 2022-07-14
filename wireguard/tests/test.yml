@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  remote_user: root
+  become: True
+  roles:
+    - role: galaxy-wireguard
+      server_wireguard_ip: <your desired ip>
+      peers:
+        - public_key: <peers public key> 
+          endpoint: <peers ip and port>
+          allowed_ips: <peers ip configuration>

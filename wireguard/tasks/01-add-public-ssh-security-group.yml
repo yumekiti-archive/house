@@ -1,0 +1,14 @@
+---
+# Temporarily add public SSH security group.
+
+- name: Temporarily add public SSH security group
+  command: openstack --verbose server add security group {{ iaas_server_name }} {{ security_group }}
+  register: security_group_add
+  delegate_to: "{{ iaas_controller }}"
+
+- name: Skip SSH host key validation on the remote host
+  shell: "ssh-keyscan -H {{ inventory_hostname }} >> ~/.ssh/known_hosts"
+  delegate_to: localhost
+  when:
+    - inventory_hostname != "localhost"
+    - skip_host_key_validation | bool

@@ -1,0 +1,7 @@
+---
+# Remove public SSH security group.
+
+- name: Remove public SSH security group
+  command: openstack --verbose server remove security group {{ iaas_server_name }} {{ security_group }}
+  register: security_group_remove
+  delegate_to: "{{ iaas_controller }}"

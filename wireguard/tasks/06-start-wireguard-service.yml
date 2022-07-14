@@ -1,0 +1,13 @@
+---
+- name: Reboot the server if requested
+  reboot:
+  become: yes
+  when: reboot_before_starting_service | bool
+
+# sudo systemctl start wg-quick@wgX
+- name: Start/restart Wireguard service
+  systemd:
+    name: "wg-quick@{{ service_interface }}"
+    enabled: "{{ service_enabled }}"
+    state: restarted
+  become: yes

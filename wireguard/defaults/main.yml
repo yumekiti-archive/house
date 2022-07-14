@@ -1,0 +1,60 @@
+---
+# Default variables
+
+# Common ####################################################################
+
+# The set-up type, either "server" or "client".
+setup_type: "server"
+
+# Enable if run on dynamically created hosts (e.g. via Terraform).
+skip_host_key_validation: false
+
+# Allow for fact gathering if it cannot be run due to the firewall.
+gather_facts_later: false
+
+# File and directory paths.
+configuration_directory: "/etc/wireguard"
+private_key_file_name: "privatekey"
+private_key_file_path: "{{ configuration_directory }}/{{ private_key_file_name }}"
+public_key_file_name: "publickey"
+public_key_file_path: "{{ configuration_directory }}/{{ public_key_file_name }}"
+
+# Always run the service (including after reboots)?
+service_enabled: true
+# Reboot before starting it? Solves the "Unable to start service" problem.
+reboot_before_starting_service: false
+
+# What interface should be used?  wg0, wg1, etc.
+service_interface: "wg0"
+server_port: 51820
+
+# Persistent keepalive window.
+keepalive_interval_seconds: 25
+
+# Server mode ###############################################################
+
+# Security group settings.
+# Is it necessary to alter security groups to allow SSH for server installation?
+alter_security_groups: true
+# These can all be ignored if the previous variable is set to False.
+security_group: "public_ssh"
+iaas_controller: "localhost"
+iaas_server_name: "gateway0"
+
+# Server configuration.
+server_wireguard_ip: 10.7.0.1
+server_internal_interface: "eth0"
+
+# List of client configurations.
+peers: []
+
+# Client mode ###############################################################
+
+# Client configuration.
+client_wireguard_ip: 10.7.0.2
+# The private cloud network.  Can also be a comma-separated list.
+client_accessible_ips: "10.10.0.0/16"
+
+# Server configuration.
+server_public_ip: 203.123.113.123
+server_public_key: "2cISCNtFl9ZJUXhcwwLTBte76LiYQC3W8R8pL+hTVzM="

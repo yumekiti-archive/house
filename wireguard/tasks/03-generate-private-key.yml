@@ -1,0 +1,32 @@
+---
+- name: Ensure wireguard configuration directory is present
+  file:
+    path: "{{ configuration_directory }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+  become: yes
+
+- name: Generate a new private key if it does not exist yet
+  command: wg genkey
+  args:
+    chdir: "{{ configuration_directory }}"
+    creates: "{{ private_key_file_path }}"
+  register: private_key_encoded
+  become: yes
+
+- name: Save the private key to a file
+  copy:
+    content: "{{ private_key_encoded.stdout }}"
+    dest: "{{ private_key_file_path }}"
+  when: private_key_encoded.changed
+  become: yes
+
+- name: Secure permissions on the private key
+  file:
+    path: "{{ private_key_file_path }}"
+    owner: root
+    group: root
+    mode: '0600'
+  become: yes

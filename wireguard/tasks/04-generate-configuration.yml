@@ -1,0 +1,28 @@
+---
+- name: Read the private key file contents
+  slurp:
+    src: "{{ private_key_file_path }}"
+  register: private_key_file_data
+  become: yes
+
+- name: Decode the private key read from the file
+  set_fact:
+    private_key_decoded: "{{ private_key_file_data.content | b64decode }}"
+
+- name: Set the configuration template file for server mode
+  set_fact:
+    configuration_template: "server.conf.j2"
+  when: setup_type == "server"
+
+- name: Set the configuration template file for client mode
+  set_fact:
+    configuration_template: "client.conf.j2"
+  when: setup_type == "client"
+
+- name: Generate the Wireguard configuration file
+  template:
+    src: "{{ configuration_template }}"
+    dest: "{{ configuration_directory }}/{{ service_interface }}.conf"
+    force: yes
+    mode: 0600
+  become: yes

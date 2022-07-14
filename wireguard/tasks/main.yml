@@ -1,0 +1,29 @@
+---
+# Main tasks file for Wireguard Cloud Gateway Ansible role.
+
+- name: Add public SSH security group
+  import_tasks: 01-add-public-ssh-security-group.yml
+  when:
+    - setup_type == "server"
+    - alter_security_groups | bool
+
+- name: Install Wireguard
+  import_tasks: 02-install-wireguard.yml
+
+- name: Generate the private key
+  import_tasks: 03-generate-private-key.yml
+
+- name: Generate the app configuration
+  import_tasks: 04-generate-configuration.yml
+
+- name: Generate the public key
+  import_tasks: 05-generate-public-key.yml
+
+- name: Start the Wireguard service
+  import_tasks: 06-start-wireguard-service.yml
+
+- name: Remove public SSH security group
+  import_tasks: 07-remove-public-ssh-security-group.yml
+  when:
+    - setup_type == "server"
+    - alter_security_groups | bool

@@ -1,0 +1,19 @@
+---
+- name: Gather facts now that SSH is available
+  setup:
+  when: gather_facts_later | bool
+
+- name: Upgrade OS software packages
+  apt:
+    update_cache: yes
+    upgrade: yes
+  become: yes
+  when: (ansible_facts['distribution'] == "Ubuntu") and
+        (ansible_facts['distribution_version'] < "20.04")
+
+- name: Install wireguard package
+  apt:
+    name: wireguard
+    state: present
+    update_cache: yes
+  become: yes

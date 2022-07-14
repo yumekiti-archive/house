@@ -1,0 +1,21 @@
+---
+- name: Generate the public key from the private key if it does not exist yet
+  command: wg pubkey
+  args:
+    chdir: "{{ configuration_directory }}"
+    stdin: "{{ private_key_decoded }}"
+    creates: "{{ public_key_file_path }}"
+  register: public_key_file_data
+  become: yes
+
+- name: Save the public key to a file
+  copy:
+    content: "{{ public_key_file_data.stdout }}"
+    dest: "{{ public_key_file_path }}"
+  when: public_key_file_data.changed
+  become: yes
+
+- name: Wait for confirmation that the public key has been recorded for use elsewhere
+  pause:
+    prompt: "The public key is `{{ public_key_file_data.stdout }}`. Please continue to confirm that you have taken a copy if needed"
+  when: public_key_file_data.changed
